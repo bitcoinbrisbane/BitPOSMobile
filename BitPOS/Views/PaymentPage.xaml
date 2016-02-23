@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BitPOS.PaymentPage">
+	<ContentPage.Content>
+		<StackLayout HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="{Binding StatusColour}">
+			<ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
+			<Label Text="{Binding Status}" FontSize="Medium" />
+            <Label Text="{Binding Address}" FontSize="Small" />
+            <Image Source="{Binding ImageUrl}" />
+            <Button Text="Refresh" Clicked="OnRefreshButtonClicked" BackgroundColor="Green" TextColor="White"></Button>
+<!--            <Button x:Name="dismissButton" Text="Dismiss" Clicked="OnDismissButtonClicked" />-->
+        </StackLayout>
+	</ContentPage.Content>
+</ContentPage>
