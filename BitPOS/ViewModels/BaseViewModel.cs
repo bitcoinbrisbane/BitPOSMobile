@@ -8,6 +8,7 @@ namespace BitPOS
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		private Boolean _isBusy;
+		private Boolean _allowUserInteration;
 
 		public Boolean IsBusy
 		{
@@ -19,6 +20,19 @@ namespace BitPOS
 			get
 			{
 				return _isBusy;
+			}
+		}
+
+		public Boolean AllowUserInteration
+		{
+			set
+			{
+				_allowUserInteration = value;
+				OnPropertyChanged ("AllowUserInteration");
+			}
+			get
+			{
+				return _allowUserInteration;
 			}
 		}
 

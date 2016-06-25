@@ -4,5 +4,10 @@
 	x:Class="BitPOS.SettingsPage"
 	Title="Settings">
 	<ContentPage.Content>
+		<StackLayout Spacing="20" Padding="20" VerticalOptions="Center">
+			<ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
+			<Switch IsToggled="{Binding IsTestnet}"></Switch>
+			<Button Text="Save" Clicked="OnSaveButtonClicked" BackgroundColor="Green" TextColor="White"></Button>
+		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

@@ -25,8 +25,6 @@ namespace BitPOS
 
 		private async void OnButtonClicked(object sender, EventArgs args)
 		{
-			//Button button = (Button)sender;
-
 			_viewModel.IsBusy = true;
 
 			try
@@ -52,14 +50,14 @@ namespace BitPOS
 				//Push via nav so we have back button.
 				await Navigation.PushAsync (paymentPage);
 			}
-			catch (Exception ex) {
+			catch (Exception ex) 
+			{
 				await DisplayAlert ("Fail", ex.Message, "Cancel");
 			}
 		}
 
 		private void OnClearButtonClicked(object sender, EventArgs args)
 		{
-			//Button button = (Button)sender;
 			_viewModel.Amount = 0;
 		}
 	}

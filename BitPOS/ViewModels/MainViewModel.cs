@@ -10,13 +10,15 @@ namespace BitPOS
 		private Decimal _amount;
 		private Decimal _bitcoinAmount;
 		private Decimal _rate;
+		private String _reference;
 
 		public Decimal Amount
 		{
 			set
 			{
 				_amount = value;
-				if (_rate > 0) {
+				if (_rate > 0) 
+				{
 					BitcoinAmount = _amount / _rate;
 				}
 				OnPropertyChanged ("Amount");
@@ -53,21 +55,34 @@ namespace BitPOS
 			}
 		}
 
+		public String Reference
+		{
+			set
+			{
+				_reference = value;
+				OnPropertyChanged ("Reference");
+			}
+			get
+			{
+				return _reference;
+			}
+		}
+
 		public MainViewModel ()
 		{
 		}
 
 		public async Task<Models.BitPOS.OrderResponse> CreateOrder()
 		{
-			BitPOSClient client = new BitPOSClient (Settings.Instance.Key, Settings.Instance.Password, Settings.Instance.TestNet);
-			Models.BitPOS.OrderResponse orderResponse = await client.CreateOrder (Convert.ToInt32(Amount * 100));
+			BitPOSClient client = new BitPOSClient (Settings.Instance.Key, Settings.Instance.Password, Settings.Instance.IsTestNet);
+			Models.BitPOS.OrderResponse orderResponse = await client.CreateOrder (Convert.ToInt32(Amount * 100), this.Reference, "");
 
 			return orderResponse;
 		}
 
 		public async Task UpdateRate()
 		{
-			BitPOS.IExchangeRateClient client = new BitPOSClient (Settings.Instance.Key, Settings.Instance.Password, Settings.Instance.TestNet);
+			BitPOS.IExchangeRateClient client = new BitPOSClient (Settings.Instance.Key, Settings.Instance.Password, Settings.Instance.IsTestNet);
 
 			this.Rate = 600;
 			//this.Rate = await client.GetExchangeRateAsync ("AUD");

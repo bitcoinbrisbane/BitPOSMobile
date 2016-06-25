@@ -98,20 +98,21 @@ namespace BitPOS
 		{
 		}
 
-		public async Task<Models.BitPOS.OrderResponse> CreateOrder()
-		{
-			BitPOSClient client = new BitPOSClient (Settings.Instance.Key, Settings.Instance.Password, Settings.Instance.TestNet);
-			Models.BitPOS.OrderResponse orderResponse = await client.CreateOrder (Convert.ToInt32(Amount * 100));
-
-			return orderResponse;
-		}
+//		public async Task<Models.BitPOS.OrderResponse> CreateOrder()
+//		{
+//			BitPOSClient client = new BitPOSClient (Settings.Instance.Key, Settings.Instance.Password, Settings.Instance.IsTestNet);
+//			Models.BitPOS.OrderResponse orderResponse = await client.CreateOrder (Convert.ToInt32(Amount * 100), "Bitcoin Brisbane", "Test");
+//
+//			return orderResponse;
+//		}
 
 		public async Task UpdateStatus()
 		{
-			BitPOSClient client = new BitPOSClient (Settings.Instance.Key, Settings.Instance.Password, Settings.Instance.TestNet);
-			String statusResponse = await client.GetOrderStatus (this.EncodedOrderId);
-
-			Status = "Unpaid";
+			using (BitPOSClient client = new BitPOSClient (Settings.Instance.Key, Settings.Instance.Password, Settings.Instance.IsTestNet)) 
+			{
+				String statusResponse = await client.GetOrderStatus (this.EncodedOrderId);
+				Status = "Unpaid";
+			}
 		}
 	}
 }
